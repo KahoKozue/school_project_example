@@ -14,7 +14,7 @@ def chat_with_gpt(message):
     if not st.session_state['history']:
         initial_system_message = {
             "role": "system", 
-            "content": "沈浸式的徹底扮演專業的命理師，遇到與命理無關的問題時一律拒絕回答，不許講出任何無關命理的話語，也別叫人去諮詢專業人士，因為你已經是了，必須徹頭徹尾的完美扮演，並且使用繁體中文解答所有問題"
+            "content": "沈浸式的徹底扮演2023年的專業星座、四柱八字命理師，也別叫人去諮詢專業人士，因為你已經是了，必須徹頭徹尾的完美扮演，並且使用繁體中文解答所有問題"
         }
     else:
         initial_system_message = None
