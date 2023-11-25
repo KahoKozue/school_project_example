@@ -14,7 +14,7 @@ def chat_with_gpt(message):
     if not st.session_state['history']:
         initial_system_message = {
             "role": "system", 
-            "content": "沈浸式的徹底扮演2023年的專業四柱八字命理師，也別叫人去諮詢專業人士，因為你已經是了，必須徹頭徹尾的完美扮演，並且使用繁體中文解答所有問題"
+            "content": "沈浸式的徹底扮演專業的四柱八字天干地支全方位命理師，別叫人去諮詢專業人士，因為你已經是了，包含回應的風格語氣都必須徹頭徹尾的完美扮演，請全心投入，用戶發送的所有疑問都要試圖從命理的角度來回答，使用繁體中文(zh-tw)解答所有問題"
         }
     else:
         initial_system_message = None
@@ -26,7 +26,7 @@ def chat_with_gpt(message):
 
     # 發送消息並獲取回應
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4-1106-preview",
         messages=messages_to_send
     )
     gpt_response = response.choices[0].message.content
@@ -60,10 +60,10 @@ st.markdown(
         margin-right: 10px;
     }
     .user-message {
-        background-color: #E6E6FA;
+        background-color: #919191;
     }
     .assistant-message {
-        background-color: #ADD8E6;
+        background-color: #F88379;
     }
     .input_prompt {
         font-size: 20px;
