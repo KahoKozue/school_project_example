@@ -14,7 +14,7 @@ def chat_with_gpt(message):
     if not st.session_state['history']:
         initial_system_message = {
             "role": "system", 
-            "content": "沈浸式的徹底扮演2023年的專業星座、四柱八字命理師，也別叫人去諮詢專業人士，因為你已經是了，必須徹頭徹尾的完美扮演，並且使用繁體中文解答所有問題"
+            "content": "沈浸式的徹底扮演2023年的專業四柱八字命理師，也別叫人去諮詢專業人士，因為你已經是了，必須徹頭徹尾的完美扮演，並且使用繁體中文解答所有問題"
         }
     else:
         initial_system_message = None
@@ -127,6 +127,9 @@ st.columns(1)
 if 'history' in st.session_state:
     for role, message in st.session_state['history']:
         key = f"{role}-{hash(message)}"
-        label = "你" if role == "user" else "命理師"
+        label = "你" if role == "user" else "命理师"
+        # 使用 pre 標籤包裹消息内容，以保持原格式
+        formatted_message = f"<pre>{message}</pre>"
         message_class = "user-message" if role == "user" else "assistant-message"
-        st.markdown(f"<div class='message {message_class}'><span class='message-label'>{label}:</span>{message}</div>", unsafe_allow_html=True)
+        # 使用 formatted_message 替代原始 message
+        st.markdown(f"<div class='message {message_class}'><span class='message-label'>{label}:</span>{formatted_message}</div>", unsafe_allow_html=True)
