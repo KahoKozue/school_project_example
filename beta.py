@@ -108,7 +108,7 @@ st.markdown('<p class="input_prompt">輸入您的疑惑：</p>', unsafe_allow_ht
 # 輸入框
 user_input = st.text_input("", key="user_input")  # 空字符串作為標簽
 
-# 在容器中創建放置按钮，防止影響後續排版
+# 在容器中創建放置按鈕，防止影響後續排版
 with st.container():
     col1, col2 = st.columns([12, 2])
 
@@ -127,8 +127,8 @@ st.columns(1)
 if 'history' in st.session_state:
     for role, message in st.session_state['history']:
         key = f"{role}-{hash(message)}"
-        label = "你" if role == "user" else "命理师"
-        # 使用 pre 標籤包裹消息内容，以保持原格式
+        label = "你" if role == "user" else "命理師"
+        # 使用 pre 標籤包裹消息內容，以保持原格式
         formatted_message = f"<pre>{message}</pre>"
         message_class = "user-message" if role == "user" else "assistant-message"
         # 使用 formatted_message 替代原始 message
