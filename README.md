@@ -1,1 +1,1 @@
-# school_project_example
+# 2023/12/2資訊研討會暨專題競賽demo用
