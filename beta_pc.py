@@ -1,16 +1,16 @@
 import openai
 import streamlit as st
 
-# 創建 OpenAI 客戶端
-client = openai.OpenAI(api_key='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')
+# 讀key跟建立
+client = openai.OpenAI(api_key='')
 
-# 初始化對話歷史
+# 初始化對話
 if 'history' not in st.session_state:
     st.session_state['history'] = []
 
-# 聊天功能
+# 聊天
 def chat_with_gpt(message):
-    # 初始化系統訊息（不顯示在界面上）
+    # 前置角色設定
     if not st.session_state['history']:
         initial_system_message = {
             "role": "system", 
@@ -19,19 +19,19 @@ def chat_with_gpt(message):
     else:
         initial_system_message = None
 
-    # 準備要發送給 API 的消息列表
+    # 給 API 的訊息列表
     messages_to_send = [initial_system_message] if initial_system_message else []
     messages_to_send += [{"role": "user", "content": message}]
     messages_to_send += [{"role": h[0], "content": h[1]} for h in st.session_state['history']]
 
-    # 發送消息並獲取回應
+    # 指定模型
     response = client.chat.completions.create(
         model="gpt-4-1106-preview",
         messages=messages_to_send
     )
     gpt_response = response.choices[0].message.content
 
-    # 將用戶和 AI 的消息添加到歷史（用於顯示）
+    # 把人跟AI 的對話訊息加到歷史顯示
     st.session_state['history'].append(["user", message])
     st.session_state['history'].append(["assistant", gpt_response])
 
@@ -39,10 +39,10 @@ def chat_with_gpt(message):
 def clear_history():
     st.session_state['history'] = []
 
-# Streamlit 界面設置
+# 界面設定
 st.set_page_config(page_title="命理GPT 2023.1.12.2 Beta Preview", layout="wide")
 
-# 自定義 CSS 以改變文字大小
+# 後面的css
 st.markdown(
     """
     <style>
@@ -69,7 +69,7 @@ st.markdown(
         font-size: 20px;
         font-weight: bold;
     }
-    .sidebar .markdown-text { /* 增加側邊欄的字體大小 */
+    .sidebar .markdown-text {
         font-size: 20px;
     }
     </style>
@@ -80,7 +80,7 @@ st.markdown(
 # 標題
 st.title("命理GPT Beta Preview")
 
-# 側邊欄
+# 側欄
 with st.sidebar:
     st.markdown("""
         **核心技術:** Fine-Tuning(微調)  
@@ -94,21 +94,18 @@ with st.sidebar:
         - REDACTED_NAME  
         - REDACTED_NAME  
     """)
-    # 添加一個指向 Google 表單的鏈接
     st.markdown("  \n")
-    st.markdown("有任何意見或建議，歡迎填寫  \n[回饋表單](https://forms.gle/cC6c3jgv4tkxFqL97)")
-    # 顯示版本號
-    st.markdown("---")  # 分隔線
-    st.markdown("**版本號:** 1.12.2") 
-    # 這里可以添加更多側邊欄選項
+    st.markdown("有任何意見或建議，歡迎填寫  \n[意見表單](https://forms.gle/cC6c3jgv4tkxFqL97)")
+    st.markdown("---")
+    st.markdown("**目前版本:** 1.14.0")
 
-# 在輸入框上方添加自定義的提示文字
+# 輸入框上面的字
 st.markdown('<p class="input_prompt">輸入您的疑惑：</p>', unsafe_allow_html=True)
 
-# 輸入框
-user_input = st.text_input("", key="user_input")  # 空字符串作為標簽
+# 輸入
+user_input = st.text_input("", key="user_input")
 
-# 在容器中創建放置按鈕，防止影響後續排版
+# 按鈕放容器裡預防動到後面排版(歪掉)
 with st.container():
     col1, col2 = st.columns([12, 2])
 
@@ -120,16 +117,16 @@ with st.container():
         if st.button("清除歷史"):
             clear_history()
 
-# 這里添加一個空的 columns 調用，以結束之前的列布局影響
+# 空columns再預防上面動到排版
 st.columns(1)
 
-# 顯示對話歷史
+# 對話歷史
 if 'history' in st.session_state:
     for role, message in st.session_state['history']:
         key = f"{role}-{hash(message)}"
         label = "你" if role == "user" else "命理師"
-        # 使用 pre 標籤包裹消息內容，以保持原格式
+        # 保持api訊息格式(輸出正常換行之類)
         formatted_message = f"<pre>{message}</pre>"
         message_class = "user-message" if role == "user" else "assistant-message"
-        # 使用 formatted_message 替代原始 message
+        # 保留格式的訊息替代原始 message
         st.markdown(f"<div class='message {message_class}'><span class='message-label'>{label}:</span>{formatted_message}</div>", unsafe_allow_html=True)
