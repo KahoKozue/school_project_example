@@ -40,7 +40,7 @@ def clear_history():
     st.session_state['history'] = []
 
 # 界面設定
-st.set_page_config(page_title="命理GPT 2023.1.14.0 Beta Preview", layout="wide")
+st.set_page_config(page_title="命理GPT Beta Preview", layout="wide")
 
 # 後面的css
 st.markdown(
