@@ -83,16 +83,7 @@ st.title("命理GPT Beta Preview")
 # 側欄
 with st.sidebar:
     st.markdown("""
-        **核心技術:** Fine-Tuning(微調)  
-        **指導老師:** 馬芳資  
-        **成員:**  
-        - REDACTED_NAME  
-        - REDACTED_NAME  
-        - REDACTED_NAME  
-        - REDACTED_NAME  
-        - REDACTED_NAME  
-        - REDACTED_NAME  
-        - REDACTED_NAME  
+        **核心技術:** Fine-Tuning(微調)
     """)
     st.markdown("  \n")
     st.markdown("有任何意見或建議，歡迎填寫  \n[意見表單](https://forms.gle/cC6c3jgv4tkxFqL97)")
