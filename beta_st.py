@@ -89,7 +89,6 @@ with st.sidebar:
         **核心技術:** Fine-Tuning(微調)
     """)
     st.markdown("  \n")
-    st.markdown("有任何意見或建議，歡迎填寫  \n[意見表單](https://forms.gle/cC6c3jgv4tkxFqL97)")
     st.markdown("---")
     st.markdown("**目前版本:** 1.14.0")
 
